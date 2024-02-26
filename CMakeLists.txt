@@ -51,7 +51,7 @@ endif()
 find_package(Git)
 execute_process(COMMAND
   ${GIT_EXECUTABLE} describe --always --dirty
-  WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+  WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
   OUTPUT_VARIABLE GIT_SHA1
   OUTPUT_STRIP_TRAILING_WHITESPACE
 )
@@ -60,7 +60,7 @@ execute_process(COMMAND
   # Note: when git version 2.22 is more common, then we can use the following command
   #       to retrieve the current branch name.
   # ${GIT_EXECUTABLE} branch --show-current
-  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
   OUTPUT_VARIABLE GIT_BRANCH
   OUTPUT_STRIP_TRAILING_WHITESPACE
 )
@@ -69,7 +69,7 @@ message(STATUS "Repository Git Branch: ${GIT_BRANCH}, SHA1: ${GIT_SHA1}")
 #
 # configure a header file to pass some of the CMake settings to the source code
 #
-configure_file("${CMAKE_SOURCE_DIR}/SperrConfig.h.in" SperrConfig.h @ONLY)
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/SperrConfig.h.in" SperrConfig.h @ONLY)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 
@@ -179,7 +179,7 @@ endif()
 
 # Add a pkg-config file, also copy over SperrConfig.h
 #
-configure_file("${CMAKE_SOURCE_DIR}/SPERR.pc.in" SPERR.pc @ONLY)
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/SPERR.pc.in" SPERR.pc @ONLY)
 install( FILES "${CMAKE_BINARY_DIR}/SPERR.pc" DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
 install( FILES "${CMAKE_BINARY_DIR}/SperrConfig.h" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} )
 
